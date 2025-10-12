@@ -1,24 +1,21 @@
 spring:
   application:
     name: user
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/userDb
-    username: admin
-    password: admin
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    database: POSTGRESQL
-    show-sql: true
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27017/userDb?authSource=admin
+      database: userDb
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+
 server:
   port: 8082
+
+logging:
+  level:
+    org:
+      springframework:
+        web : debug

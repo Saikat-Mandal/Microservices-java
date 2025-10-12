@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable Long userId){
+    public ResponseEntity<?> getUserById(@PathVariable String userId){
         if(userService.getUserById(userId) == null){
             return new ResponseEntity<>("User not found" ,HttpStatus.NOT_FOUND);
         }
@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest , @PathVariable Long userId){
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest , @PathVariable String userId){
         if(userService.getUserById(userId) == null){
             return new ResponseEntity<>("User not found" , HttpStatus.NOT_FOUND);
         }

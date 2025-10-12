@@ -5,6 +5,7 @@ import com.ecom.user.dto.UserRequest;
 import com.ecom.user.dto.UserResponse;
 import com.ecom.user.model.Address;
 import com.ecom.user.model.User;
+import com.ecom.user.respository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final com.ecom.user.respository.UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public List<UserResponse> getAllUsers(){
         return userRepository.findAll().stream()
@@ -29,11 +30,11 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(Long id){
+    public User getUserById(String id){
         return userRepository.findById(id).orElse(null);
     }
 
-    public void updateUser(UserRequest userRequest ,Long userId) {
+    public void updateUser(UserRequest userRequest ,String userId) {
         User userToUpdate = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 
