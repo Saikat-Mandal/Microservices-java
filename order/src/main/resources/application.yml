@@ -1,32 +1,5 @@
 spring:
   application:
     name: order
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/orderDb
-    username: admin
-    password: admin
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    database: POSTGRESQL
-    show-sql: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-
-server:
-  port: 8083
+  config:
+    import: optional:configserver:https://localhost:8888
