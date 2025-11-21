@@ -4,6 +4,9 @@ spring:
       uri: ${MONGO_URI}
       database: userDb
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   endpoints:
     web:
       exposure:
