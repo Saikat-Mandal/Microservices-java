@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: product
+              uri: lb://PRODUCT
+              predicates:
+                - Path=/api/products/**
+            - id: user
+              #              uri: http://localhost:8082
+              uri: lb://USER
+              predicates:
+                - Path=/api/users/**
+            - id: order
+              uri: lb://ORDER
+              predicates:
+                - Path=/api/order/** , /api/cart/**
+            - id: eureka
+              uri: http://localhost:8761
+              predicates:
+                - Path=/eureka/main
+              filters:
+                - SetPath=/
+            - id: eureka-server-static
+              uri: http://localhost:8761
+              predicates:
+                - Path=/eureka/**
+server:
+  port: 8087
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: '*'
